@@ -1,0 +1,25 @@
+{% extends 'main/baseapp.html' %}
+{% block body_block %}
+
+<h1>{{tutor_details.firstName}} {{tutor_details.lastName}} </h1>
+<br>
+<p>email: {{tutor_details.tutor_email}}</p>
+<p>University: {{tutor_details.university_name}}</p>
+<p>Tuition Rate (per hour): HKD{{tutor_details.hourly_rate}}</p>
+
+<p>Available Times:
+  <form method="POST">
+    {{ session_form.as_p }}
+    {% csrf_token %}
+  <select name="slot_id">
+  {% for entry in slots %}
+      <option value="{{ entry.id }}">{{ entry.start_time }}</option>
+  {% endfor %}
+  <input type="submit" value = "Book">
+  </select>
+  </form>
+
+</p>
+
+<a href= "{% url 'main:tutor-list' %}"> Back to Previous </a>
+{% endblock %}

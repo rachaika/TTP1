@@ -1,0 +1,16 @@
+{% extends 'main/baseapp.html' %}
+{% block body_block %}
+
+<form method="POST">
+  {{ session_form.as_p }}
+  {% csrf_token %}
+<select name="slot_id">
+{% for entry in slots %}
+    <option value="{{ entry.id }}">{{ entry.start_time }}</option>
+{% endfor %}
+<input type="submit" value = "Book">
+</select>
+</form>
+
+
+{% endblock %}
